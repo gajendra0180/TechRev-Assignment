@@ -1,0 +1,31 @@
+{
+  "name": "techrev-assignment",
+  "version": "1.0.0",
+  "description": "Customer management web application",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gajendra0180/TechRev-Assignment.git"
+  },
+  "author": "Gajendra",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gajendra0180/TechRev-Assignment/issues"
+  },
+  "homepage": "https://github.com/gajendra0180/TechRev-Assignment#readme",
+  "dependencies": {
+    "bcrypt": "^5.1.0",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.1",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^8.5.1",
+    "mysql2": "^2.3.3",
+    "nodemon": "^2.0.20",
+    "sequelize": "^6.25.8"
+  }
+}
