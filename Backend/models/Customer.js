@@ -23,7 +23,8 @@ class Customer extends BaseModel {
                 },
                 userName: {
                     type: DataTypes.STRING(255),
-                    defaultValue: null
+                    defaultValue: null,
+                    allowNull: false
                 },
                 email: {
                     type: DataTypes.STRING(255),
@@ -34,7 +35,7 @@ class Customer extends BaseModel {
                     defaultValue: null
                 },
                 dob: {
-                    type: DataTypes.DATE,
+                    type: DataTypes.STRING,
                     defaultValue: null
                 },
                 gender: {

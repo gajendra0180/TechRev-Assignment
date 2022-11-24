@@ -2,7 +2,6 @@ const express = require('express');
 const dotenv = require('dotenv')
 const models = require('./models')
 const bodyParser = require('body-parser')
-const AuthRoutes = require('./Routes/AuthRoutes.js');
 const CustomerRoutes = require('./Routes/CustomerRoutes.js');
 dotenv.config({ path: '.env' });
 const app = express()
@@ -38,7 +37,6 @@ app.use((req, res, next) => {
 // application level middleware
 // app.use(authMiddleWare.AuthMiddleware);
 
-app.use("/api/auth", AuthRoutes);
 app.use("/api/customer", CustomerRoutes);
 
 

@@ -4,7 +4,6 @@ module.exports = {
     async getAllCustomers(req, res) {
         try {
             const custData = await models.Customer.findAll({ raw: true });
-            console.log(custData)
             res.send({ code: 200, message: 'All Customer List', data: custData })
         }
         catch (err) {
@@ -13,10 +12,16 @@ module.exports = {
     },
     async getCustomerById(req, res) {
         try {
+            console.log(req.body.customerId)
             const customerId = req.body.customerId;
-            const custData = await models.Customer.findOne({ where: { customerId: customerId }, raw: true });
-            console.log(custData);
-            res.send({ code: 200, message: 'Customer Details', data: custData })
+            const custData = await models.Customer.findOne({ where: { id: customerId }, raw: true });
+            const addressData = await models.Address.findOne({
+                where: {
+                    customerId: customerId
+                },
+                raw: true
+            })
+            res.send({ code: 200, message: 'Customer Details', customerData: custData, addressData })
         }
         catch (err) {
             res.send({ code: 500, message: err.message })
@@ -24,9 +29,11 @@ module.exports = {
     },
     async insertCustomer(req, res) {
         try {
+            console.log(req.body)
             const custData = req.body;
             bcrypt.hash(custData.password, 10, async function (err, hash) {
                 if (err) throw err;
+
                 const createdRecord = await models.Customer.create({
                     "firstName": custData.firstName,
                     "lastName": custData.lastName,
@@ -99,18 +106,18 @@ module.exports = {
     },
     async deleteCustomer(req, res) {
         try {
-            // from the frontend we will send uuid of the customer which we want to delete
+            // from the frontend we will send userName of the customer which we want to delete
             const custData = req.body;
             const userExists = await models.Customer.findOne({
                 where: {
-                    uuid: custData.customerUUID
+                    user_name: custData.userName
                 },
                 raw: true
             })
             if (userExists) {
                 await models.Customer.destroy({
                     where: {
-                        uuid: custData.customerUUID
+                        id: userExists.id
                     }
                 })
                 await models.Address.destroy({
